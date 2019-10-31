@@ -170,8 +170,8 @@ def writeLicensePlateCharsOnImage(imgOriginalScene, licPlate):
 
 class HelloWorld(Resource):
     def get (self):
-        result = main()
-        return { 'About': result }
+        # result = main()
+        return { 'About': 'asdsad' }
 
 api.add_resource(HelloWorld, '/')
 
