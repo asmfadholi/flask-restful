@@ -1,21 +1,12 @@
-from flask import Flask, jsonify, request
-from flask_restful import Resource, Api
-
 # Main.py
 
 import cv2
 import numpy as np
 import os
-import urllib
-
 
 import DetectChars
 import DetectPlates
 import PossiblePlate
-import re
-
-app = Flask(__name__)
-api = Api(app)
 
 # module level variables ##########################################################################
 SCALAR_BLACK = (0.0, 0.0, 0.0)
@@ -26,8 +17,7 @@ SCALAR_RED = (0.0, 0.0, 255.0)
 
 showSteps = False
 
-result = 'null'
-
+###################################################################################################
 def main():
 
     blnKNNTrainingSuccessful = DetectChars.loadKNNDataAndTrainKNN()         # attempt KNN training
@@ -36,33 +26,20 @@ def main():
         print("\nerror: KNN traning was not successful\n")  # show error message
         return                                                          # and exit program
     # end if
-    
-    #MASUKIN GAMBAR DISINI
-    url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Plat_Nomor_Semarang_Dan_Sekitarnya.jpg/800px-Plat_Nomor_Semarang_Dan_Sekitarnya.jpg'
-    resp = urllib.request.urlopen(url)
-    image = np.asarray(bytearray(resp.read()), dtype='uint8')
-	  # image = np.asarray(bytearray(resp.read()), dtype=np.uint8)
-    imgOriginalScene = cv2.imdecode(image, cv2.IMREAD_COLOR)
-	  # imgOriginalScene = cv2.imdecode(image, cv2.IMREAD_COLOR)
-    # imgOriginalScene  = cv2.imread("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Plat_Nomor_Semarang_Dan_Sekitarnya.jpg/800px-Plat_Nomor_Semarang_Dan_Sekitarnya.jpg")               # open image
-    
-    
-    #  Tambahkan kode untuk inverse
-    imgOriginalScene = cv2.bitwise_not(imgOriginalScene)
+
+    imgOriginalScene  = cv2.imread("LicPlateImages/1.png")               # open image
 
     if imgOriginalScene is None:                            # if image was not read successfully
         print("\nerror: image not read from file \n\n")  # print error message to std out
         os.system("pause")                                  # pause so user can see error message
         return                                              # and exit program
     # end if
-    
-    import matplotlib.pyplot as plt
-    
+
     listOfPossiblePlates = DetectPlates.detectPlatesInScene(imgOriginalScene)           # detect plates
 
     listOfPossiblePlates = DetectChars.detectCharsInPlates(listOfPossiblePlates)        # detect chars in plates
 
-    plt.imshow(imgOriginalScene)            # show scene image
+    cv2.imshow("imgOriginalScene", imgOriginalScene)            # show scene image
 
     if len(listOfPossiblePlates) == 0:                          # if no plates were found
         print("\nno license plates were detected\n")  # inform user no plates were found
@@ -75,8 +52,8 @@ def main():
                 # suppose the plate with the most recognized chars (the first plate in sorted by string length descending order) is the actual plate
         licPlate = listOfPossiblePlates[0]
 
-        plt.imshow(licPlate.imgPlate)           # show crop of plate and threshold of plate
-        plt.imshow(licPlate.imgThresh)
+        cv2.imshow("imgPlate", licPlate.imgPlate)           # show crop of plate and threshold of plate
+        cv2.imshow("imgThresh", licPlate.imgThresh)
 
         if len(licPlate.strChars) == 0:                     # if no chars were found in the plate
             print("\nno characters were detected\n\n")  # show message
@@ -87,9 +64,10 @@ def main():
 
         print("\nlicense plate read from image = " + licPlate.strChars + "\n")  # write license plate text to std out
         print("----------------------------------------")
+
         writeLicensePlateCharsOnImage(imgOriginalScene, licPlate)           # write license plate text on the image
 
-        plt.imshow(imgOriginalScene)                # re-show scene image
+        cv2.imshow("imgOriginalScene", imgOriginalScene)                # re-show scene image
 
         cv2.imwrite("imgOriginalScene.png", imgOriginalScene)           # write image out to file
 
@@ -97,7 +75,7 @@ def main():
 
     cv2.waitKey(0)					# hold windows open until user presses a key
 
-    return licPlate.strChars
+    return
 # end main
 
 ###################################################################################################
@@ -152,27 +130,23 @@ def writeLicensePlateCharsOnImage(imgOriginalScene, licPlate):
 # end function
 
 ###################################################################################################
+if __name__ == "__main__":
+    main()
 
-# result = main()
 
-# match = re.match(r"([a-z]+)([0-9]+)", result, re.I)
-# isEven = int(match.groups()[1]) % 2 == 0
 
-# def OddOrEven(bool):
-#   if bool == True:
-#     return 'Even'
-#   else :
-#     return 'Odd'
 
-# print('region code is ' + match.groups()[0])
-# print('this plat is ' + OddOrEven(isEven))
 
-class HelloWorld(Resource):
-    def get (self):
-        result = main()
-        return { 'About': result }
 
-api.add_resource(HelloWorld, '/')
 
-if __name__ == '__name__':
-    app.run(thraeded=True, port=5000)
+
+
+
+
+
+
+
+
+
+
+
