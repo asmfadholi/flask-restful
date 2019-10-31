@@ -3,30 +3,30 @@ from flask_restful import Resource, Api
 
 # # Main.py
 
-# import cv2
-# import numpy as np
-# import os
-# import urllib
+import cv2
+import numpy as np
+import os
+import urllib
 
 
-# import DetectChars
-# import DetectPlates
-# import PossiblePlate
-# import re
+import DetectChars
+import DetectPlates
+import PossiblePlate
+import re
 
-# app = Flask(__name__)
-# api = Api(app)
+app = Flask(__name__)
+api = Api(app)
 
-# # module level variables ##########################################################################
-# SCALAR_BLACK = (0.0, 0.0, 0.0)
-# SCALAR_WHITE = (255.0, 255.0, 255.0)
-# SCALAR_YELLOW = (0.0, 255.0, 255.0)
-# SCALAR_GREEN = (0.0, 255.0, 0.0)
-# SCALAR_RED = (0.0, 0.0, 255.0)
+# module level variables ##########################################################################
+SCALAR_BLACK = (0.0, 0.0, 0.0)
+SCALAR_WHITE = (255.0, 255.0, 255.0)
+SCALAR_YELLOW = (0.0, 255.0, 255.0)
+SCALAR_GREEN = (0.0, 255.0, 0.0)
+SCALAR_RED = (0.0, 0.0, 255.0)
 
-# showSteps = False
+showSteps = False
 
-# result = 'null'
+result = 'null'
 
 # def main():
 
