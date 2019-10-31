@@ -33,7 +33,7 @@ def main():
     blnKNNTrainingSuccessful = DetectChars.loadKNNDataAndTrainKNN()         # attempt KNN training
 
     if blnKNNTrainingSuccessful == False:                               # if KNN training was not successful
-        print("\nerror: KNN traning was not successful\n")  # show error message
+        # print("\nerror: KNN traning was not successful\n")  # show error message
         return                                                          # and exit program
     # end if
     
@@ -51,7 +51,7 @@ def main():
     imgOriginalScene = cv2.bitwise_not(imgOriginalScene)
 
     if imgOriginalScene is None:                            # if image was not read successfully
-        print("\nerror: image not read from file \n\n")  # print error message to std out
+        # print("\nerror: image not read from file \n\n")  # print error message to std out
         os.system("pause")                                  # pause so user can see error message
         return                                              # and exit program
     # end if
@@ -65,7 +65,7 @@ def main():
     plt.imshow(imgOriginalScene)            # show scene image
 
     if len(listOfPossiblePlates) == 0:                          # if no plates were found
-        print("\nno license plates were detected\n")  # inform user no plates were found
+        # print("\nno license plates were detected\n")  # inform user no plates were found
     else:                                                       # else
                 # if we get in here list of possible plates has at leat one plate
 
@@ -79,14 +79,14 @@ def main():
         plt.imshow(licPlate.imgThresh)
 
         if len(licPlate.strChars) == 0:                     # if no chars were found in the plate
-            print("\nno characters were detected\n\n")  # show message
+            # print("\nno characters were detected\n\n")  # show message
             return                                          # and exit program
         # end if
 
         drawRedRectangleAroundPlate(imgOriginalScene, licPlate)             # draw red rectangle around plate
 
-        print("\nlicense plate read from image = " + licPlate.strChars + "\n")  # write license plate text to std out
-        print("----------------------------------------")
+        # print("\nlicense plate read from image = " + licPlate.strChars + "\n")  # write license plate text to std out
+        # print("----------------------------------------")
         writeLicensePlateCharsOnImage(imgOriginalScene, licPlate)           # write license plate text on the image
 
         plt.imshow(imgOriginalScene)                # re-show scene image
@@ -153,6 +153,7 @@ def writeLicensePlateCharsOnImage(imgOriginalScene, licPlate):
 
 ###################################################################################################
 
+# result = main()
 # result = main()
 
 # match = re.match(r"([a-z]+)([0-9]+)", result, re.I)
