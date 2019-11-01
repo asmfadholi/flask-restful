@@ -236,7 +236,6 @@ pyasn1==0.4.7
 pyasn1-modules==0.2.7
 pycocotools==2.0.0
 pycparser==2.19
-pydata-google-auth==0.1.3
 pydot==1.3.0
 pydot-ng==2.0.0
 pydotplus==2.0.2
