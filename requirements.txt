@@ -84,11 +84,8 @@ folium==0.8.3
 fsspec==0.5.2
 future==0.16.0
 gast==0.2.2
-GDAL==2.2.2
 gdown==3.6.4
 gensim==3.6.0
-geographiclib==1.50
-geopy==1.17.0
 gevent==1.4.0
 gin-config==0.2.1
 glob2==0.7
