@@ -341,7 +341,6 @@ thinc==7.0.8
 toolz==0.10.0
 torchsummary==1.5.1
 torchtext==0.3.1
-torchvision==0.4.1+cu100
 tornado==4.5.3
 tqdm==4.28.1
 traitlets==4.3.3
